@@ -1,0 +1,75 @@
+name:                collapd
+version:             1.0.0.0
+github:              "obreitwi/collapd"
+license:             BSD3
+author:              "Oliver Bretiweser"
+maintainer:          "oliver@breitwieser.eu"
+copyright:           "GPL v3"
+
+extra-source-files:
+- README.md
+- INSTALL.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/obreitwi/collapd#readme>
+
+dependencies:
+- attoparsec
+- base >= 4.7 && < 5
+- bytestring
+- containers
+- directory
+- gitrev
+- HsYAML
+- ldap-client
+- mtl
+- optparse-applicative
+- raw-strings-qq
+- text
+- text-ldap
+- transformers
+- unordered-containers
+
+library:
+  source-dirs: src
+
+executables:
+  collapd:
+    main:                Main.hs
+    source-dirs:         app
+    dependencies:
+    - collapd
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    # BEGIN comment in for static build
+    # - -optl-static
+    # - -optc-fPIC
+    # - -optc-Os
+    # - -optc-O2
+    # ld-options:
+    # - -static
+    # END comment in for static build
+
+tests:
+  collapd-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - collapd
+    - hspec
+    - hspec-attoparsec
+    - hspec-discover
+    - ldap-client

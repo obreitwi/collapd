@@ -1,0 +1,27 @@
+# The base under which all virtual entries reside
+collapsed_base: ou=collapsed,dc=subtree,dc=com
+# Which attributes should be forwared to the collapsed basetree?
+attributes_forward:
+        - uid
+        - gidNumber
+        - uidNumber
+        - cn
+        - sn
+# Which attributes should be appended to every entry to make them valid (e.g.
+# objectClasses)?
+# Should be a list of dictionaries (mimicking LDIF syntax).
+attributes_append:
+        - objectClass: posixAccount
+# When duplicate entries occur, hosts that appear earlier in the list take
+# priority.
+backends:
+    - base: ou=subtree,dc=host1,dc=com
+      host: host1
+      port: 389
+      filter: (objectClass=posixAccount)
+    - base: ou=another-subtree,dc=something-else,dc=de
+      host: host2
+      port: 389
+    - base: ou=yet-another-subtree,ou=even-deeper,dc=foobar,dc=org
+      host: host3
+      port: 389

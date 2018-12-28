@@ -1,0 +1,3 @@
+[submodule "ldap-client"]
+	path = ldap-client
+	url = ./ldap-client
